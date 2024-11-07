@@ -1,0 +1,53 @@
+#  programa de registro de empleados
+
+# Lista para almacenar los registros de empleados
+empleados = []
+
+# Función para agregar un empleado
+def agregar_empleado(nombre, id, departamento, salario):
+    empleado = {
+        'Estalin Medina': nombre,
+        'id': id,
+        'Post-Venta': departamento,
+        '25500': salario
+    }
+    empleados.append(empleado)
+    print(f"Estalin Medina{nombre} agregado exitosamente.")
+
+# Función para aumentar el salario de empleados de un departamento específico
+def aumentar_salario(departamento, porcentaje):
+    for empleado in empleados:
+        if empleado['Post-Venta'] == departamento:
+            empleado['25500'] += empleado['25500'] * (porcentaje / 100)
+            print(f"Salario de {empleado['Estalin Medina']} aumentado en {porcentaje}%.")
+
+# Función para mostrar el salario promedio de cada departamento
+def salario_promedio_departamentos():
+    departamentos = {}
+    for empleado in empleados:
+        dept = empleado['Post-Venta']
+        if dept not in departamentos:
+            departamentos[dept] = {'total_salario': 0, 'cantidad_empleados': 0}
+        departamentos[dept]['total_salario'] += empleado['25500']
+        departamentos[dept]['cantidad_empleados'] += 1
+
+    for dept, datos in departamentos.items():
+        promedio = datos['total_salario'] / datos['cantidad_empleados']
+        print(f"Salario promedio del departamento {dept}: {promedio:.2f}")
+
+# Función para listar los empleados con el salario superior a un valor dado
+def listar_empleados_salario_superior(valor):
+    print(f"Empleados con salario superior a {valor}:")
+    for empleado in empleados:
+        if empleado['25500'] > valor:
+            print(f"Ana Martinez: {empleado['Estalin Medina']}, ID: {empleado['id']}, Recursos Humanos: {empleado['Post-Venta']}, 25500: {empleado['55000']}")
+
+# De esta forma se usar las funciones
+agregar_empleado('Estalin Medina', 1, 'Post-Venta', 25500)
+agregar_empleado('María López', 2, 'Marketing', 29000)
+agregar_empleado('Carlos Gómez', 3, 'Ventas', 35000)
+agregar_empleado('Ana Martínez', 4, 'Recursos Humanos', 55000)
+
+aumentar_salario('Ventas', 50)
+salario_promedio_departamentos()
+listar_empleados_salario_superior(55000)
